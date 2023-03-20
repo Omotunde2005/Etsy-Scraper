@@ -5,7 +5,6 @@ import pandas
 
 FROM = 2
 TO = 3
-START_URL = 'https://www.etsy.com/c/jewelry-and-accessories?explicit=1&category_landing_page=2'
 NAME = []
 TAGS = []
 OLD_PRICE = []
@@ -13,28 +12,6 @@ NEW_PRICE = []
 RATING = []
 IMAGE = []
 LINK = []
-
-
-# A PRODUCT LISTING LINK
-
-class EtsySpider(scrapy.Spider):
-    name = 'image_scraper'
-    custom_settings = {
-        'REQUEST_FINGERPRINTER_IMPLEMENTATION': "2.7"
-    }
-    start_urls = [START_URL]
-
-    def __init__(self, category='', **kwargs):
-        super().__init__(**kwargs)
-        self.Page = kwargs['Page']
-        self.Basis = kwargs['Basis']
-        self.myBaseUrl = category + self.Page
-        self.start_urls.append(self.myBaseUrl)
-
-    def parse(self, response, **kwargs):
-        container = response.css('a.listing-link').get()
-        with open('new.html', mode='w') as file:
-            file.write(container)
 
 
 class EtsyCrawlSpider(scrapy.Spider):
